@@ -3,7 +3,6 @@
 import { useState } from "react"
 import asset from "@/assets/image.png"
 import Image from "next/image"
-import TaskPanel from "@/components/addTask"
 import {
     Bell,
     Calendar,
@@ -44,15 +43,6 @@ export default function TaskDashboard() {
     ])
 
     const [newTaskText, setNewTaskText] = useState("")
-    const [isTaskPanelOpen, setIsTaskPanelOpen] = useState(false);
-
-    const addTask = () => {
-      setIsTaskPanelOpen(true); // Open panel when button is clicked
-    };
-  
-    const closeTaskPanel = () => {
-      setIsTaskPanelOpen(false); // Close panel
-    };
 
     const pendingTasks = tasks.filter((task) => !task.completed)
     const completedTasks = tasks.filter((task) => task.completed)
@@ -253,7 +243,7 @@ export default function TaskDashboard() {
                                 className="w-full text-gray-700 outline-none mb-4"
                                 value={newTaskText}
                                 onChange={(e) => setNewTaskText(e.target.value)}
-                                onKeyDown={(e) => e.key === "Enter" && addTask()}
+                                onKeyDown={(e) => e.key === "Enter" }
                             />
 
                             <div className="flex items-center justify-between">
@@ -270,14 +260,11 @@ export default function TaskDashboard() {
                                 </div>
 
                                 <button
-        className="px-4 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200"
-        onClick={addTask} // Trigger panel on click
-      >
-        ADD TASK
-      </button>
+                                    className="px-4 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200" // Trigger panel on click
+                                >
+                                    ADD TASK
+                                </button>
 
-      {/* Task Panel - Only show if isTaskPanelOpen is true */}
-      {isTaskPanelOpen && <TaskPanel onClose={closeTaskPanel} />}
                             </div>
                         </div>
 
